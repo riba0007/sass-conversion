@@ -1,1 +1,236 @@
-// main SASS file
+// main.scss
+
+@import "variables";
+@import "mixins";
+
+//***********************************************
+//                DEFAULTS
+//***********************************************/
+*{
+    padding:0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    &:after, 
+    &:before{
+        -webkit-box-sizing: inherit;
+        box-sizing: inherit;
+    }
+}
+html{
+    font: {
+        size: 16px;
+        family: $font-sansSerif; // default for whole page
+    }
+    line-height: 1.6;
+}
+h1, h2, h3, h4{
+    font-family: $font-serif; // serif for the headings
+}
+ul{
+    list-style: none;
+}
+
+/***********************************************
+                SPECIAL
+***********************************************/
+.clearfix:after{
+    display:table;
+    clear: both;
+    content: "";
+}
+
+/***********************************************
+                LAYOUT
+***********************************************/
+.bg-header{
+    //background-color: #fff;
+    @include setColors($color-darkGrey, $color-lightBlue);
+    border: {
+        bottom:1rem solid $color-medBlue;
+        top:1rem solid $color-darkBlue;
+    }
+    position: relative;
+    &:before,
+    &:after{
+        content:"";
+        position:absolute;
+        bottom:-1rem;
+        width:30%;
+        height:1rem;
+        background-color: $color-darkBlue;
+    }   
+    &:before{
+        left:0;
+    }
+    &:after{
+        right:0;
+    }
+}
+@each $class, $color, $bgColor in 
+    (focal, $color-darkBrown, $color-lightBrown),
+    (content1, $color-darkGrey, $color-white),
+    (content2, $color-darkBlue, $color-lightBlue),
+    (footer, $color-lightGrey, $color-white) {   
+    .bg-#{$class} {
+        @include setColors($color, $bgColor);
+    }
+}
+section {
+    &.content1,
+    &.content2{
+        padding: 2rem 0;
+    } 
+    &.focal {
+        width: 400px;
+        margin: 0 auto;
+    }  
+}
+header{
+    @extend section.focal; 
+    position: relative;
+    & h1{
+        width: 100%;
+        padding: 0 2rem;
+    }
+    & nav{
+        width: 100%;
+        &>ul li{
+            width:100%;
+            float: none;
+        }
+    }
+}
+.row{
+    clear: both;
+}
+.col-2{
+    width:50%;
+    float:left;
+    padding-bottom: 2rem;
+    border-left:1px solid $color-darkBlue;
+    margin-bottom: 2rem;
+}
+footer{
+    padding:2rem 0;
+    & .col-2:first-child{
+        border-left: 0;
+    }
+}
+/***********************************************
+                NAVIGATION
+***********************************************/
+header nav{
+    padding:2rem 0;
+    clear: both;
+    &>ul>li{
+        float: left;
+        background-color: $color-white;
+        &>a{
+            display:block;
+            text: {
+                align: center;
+                decoration: none;
+            }
+            @include setColors($color-darkGrey, $color-white);
+            font-size: $font-size-medium;
+            letter-spacing: 0.25rem;
+            border:1px solid $color-lightGrey { 
+                bottom: none;
+            }
+            padding:1.0rem 2rem;
+            line-height: 1;
+            &:hover{
+                font-weight: 700;
+                color: $color-darkBrown;
+            }
+        }
+    }
+}
+/***********************************************
+                CONTENT
+***********************************************/
+header h1{
+    color: $color-darkBrown;
+    letter-spacing: 0.1rem;
+    & i.fa-lg{
+        display:block;
+        width: 25%;
+        float:left;
+        font-size: $font-size-titleIconLarge;
+        @include setLineHeight($font-size-title, 2);
+        color: $color-lightBrown;
+         ~ span{
+            float: right;
+            width: 75%;
+            font-size: $font-size-title;
+            padding-left: 1rem;
+            text-align: right;
+        }
+    }
+}
+.focal{ 
+    & h2{
+        font-size: $font-size-Large;
+        line-height: 1.2;
+        padding: 2rem 2rem 1rem 2rem;
+    }
+    & .author{
+        font-size: $font-size-small;
+        padding: 0.2rem 2rem 2rem;
+    }
+}
+.content1{
+    & h3{
+        font-size:$font-size-Large;
+        padding: 0.2rem 2rem 2rem;
+        & i{
+            vertical-align:middle;
+            padding-right: 2rem;
+        }
+    }
+    & p{
+        font-size: $font-size-medium;
+        padding: 0.5rem 2rem 2rem;
+    }
+}
+.content2 {
+    @each $class, $size, $padding in 
+        (h3, $font-size-Large, 1rem 2rem 0.5rem),
+        (h4, $font-size-Large, 1rem 2rem 0rem),
+        (p, $font-size-medium, 0.5rem 2rem 1rem),
+        (li, $font-size-medium, 0.5rem 2rem) {
+            & #{$class} {
+                font-size: $size;
+                padding: $padding;
+            }
+    }
+}
+/***********************************************
+                FOOTER
+***********************************************/
+footer {
+    & h4{
+        font-size: $font-size-medium;
+        padding: 0.5rem 2rem;
+        color: $color-darkBrown;
+    }
+    & .fa-circle{
+        color: $color-darkGrey;
+    }
+    & p{
+        color: $color-darkGrey;
+        font-size: $font-size-small;
+        padding: 0.5rem 2rem;
+    }
+    & h4[lang=de]{
+       display:block;
+    }
+    & h4[lang=en],
+    & h4[lang=ar],
+    & h4[lang=ru]{
+        display:none;
+    }
+}
+
+@import "queries";

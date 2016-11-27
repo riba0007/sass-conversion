@@ -1,0 +1,23 @@
+// _mixins.scss
+
+// -- Equal Spaced Columns -- //
+@mixin equalSpaced($num_of_cols, $gutter, $width:100%){
+  width: ($width - ($gutter * ($num_of_cols - 1))) / $num_of_cols;
+  margin-left: $gutter;
+  float: left;
+  // Remove Spacing from First Child
+  &:first-child{
+    margin-left: 0;
+  }
+}
+
+// -- Set content color and background color -- //
+@mixin setColors($color, $backgroundColor:none){
+    color: $color;
+    background-color: $backgroundColor;
+}
+
+//-- Set line-height according to font-size -- //
+@mixin setLineHeight ($fontSize,$lines:1) {
+    line-height: (($fontSize * 1.6) * $lines);
+}
