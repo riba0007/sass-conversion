@@ -21,3 +21,28 @@
 @mixin setLineHeight ($fontSize,$lines:1) {
     line-height: (($fontSize * 1.6) * $lines);
 }
+
+//-- set section default values-- //
+@mixin setSectionValues($width) {
+    &.focal, 
+    &.content1,
+    &.content2{
+        width: $width; 
+        margin: 0 auto;    
+    }
+}
+
+//-- media queries-- //
+@mixin breakPoint($point) {
+    $bp-small  : "(min-width:701px) and (max-width:900px)";
+    $bp-medium : "(min-width:901px) and (max-width: 1400px)";
+    $bp-large  : "(min-width:1401px)";
+    
+    @if $point == small {
+        @media all and #{$bp-small} { @content; }
+    }@else if $point == medium {
+        @media all and #{$bp-medium} { @content; }
+    }@else if $point == large {
+        @media all and #{$bp-large} { @content; }
+    }
+}

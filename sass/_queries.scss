@@ -1,5 +1,5 @@
 // _queries.scss
-@media all and (min-width:701px) and (max-width:900px){
+@include breakPoint(small){
     header{
         width: 700px;
         min-height: 8rem;
@@ -49,13 +49,7 @@
         }
     }
     section {
-        &.focal,
-        &.content1,
-        &.content2,
-        {
-            width: 700px; 
-            margin: 0 auto; 
-        }
+        @include setSectionValues(700px);
         &.content2{
             &  h4{
                 font-size: $font-size-medium;
@@ -84,7 +78,7 @@
         }
     }
 }
-@media all and (min-width:901px) and (max-width: 1400px){
+@include breakPoint(medium){
     header{
         width: 900px;
         
@@ -93,7 +87,6 @@
             width:300px;
         }
         & h1{
-            width: 100%;
             color: $color-darkBlue;
             
             & i.fa-lg{
@@ -134,12 +127,7 @@
         }
     }
     section{
-        &.focal, 
-        &.content1,
-        &.content2{
-            width: 900px; 
-            margin: 0 auto;    
-        }
+        @include setSectionValues(900px);
         &.focal{
             & h2,
             & p.author{
@@ -186,8 +174,7 @@
         }
     }
 }
-@media all and (min-width:1401px){
-    
+@include breakPoint(large){  
     header{
         width: 1400px;
         &:before,
@@ -229,12 +216,7 @@
         }
     }
     section{
-        &.focal, 
-        &.content1,
-        &.content2{
-            width: 1400px; 
-            margin: 0 auto;    
-        }
+        @include setSectionValues(1400px);
         &.focal{
             & h2{
                 font-size: $font-size-title;

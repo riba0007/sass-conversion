@@ -43,6 +43,14 @@ ul{
 /***********************************************
                 LAYOUT
 ***********************************************/
+%fooBeforeAfter{
+    content:"";
+    position:absolute;
+    bottom:-1rem;
+    width:30%;
+    height:1rem;
+    background-color: $color-darkBlue;
+}   
 .bg-header{
     //background-color: #fff;
     @include setColors($color-darkGrey, $color-lightBlue);
@@ -51,19 +59,12 @@ ul{
         top:1rem solid $color-darkBlue;
     }
     position: relative;
-    &:before,
-    &:after{
-        content:"";
-        position:absolute;
-        bottom:-1rem;
-        width:30%;
-        height:1rem;
-        background-color: $color-darkBlue;
-    }   
     &:before{
+        @extend %fooBeforeAfter;
         left:0;
     }
     &:after{
+        @extend %fooBeforeAfter;
         right:0;
     }
 }
